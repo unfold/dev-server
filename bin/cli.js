@@ -3,8 +3,8 @@
 var program = require('commander');
 var server = require('../lib');
 var path = require('path');
-var version = require('../package').version
-var description = require('../package').description
+var version = require('../package').version;
+var description = require('../package').description;
 
 function resolve(file) {
   return path.resolve(file)
@@ -26,8 +26,8 @@ program
   .option('-m, --middleware <express app>', 'optional express server')
   .option('-i, --index <file>', 'optional file to return on request', resolve)
   .option('--log-browser-connections', 'log all browsers who connect to server')
-  .parse(process.argv)
+  .parse(process.argv);
 
-program.middleware = program.middleware || program.args[0]
+program.middleware = program.middleware || program.args[0];
 
 server(program);

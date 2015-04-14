@@ -22,5 +22,19 @@
     "socket.io-client": "^1.3.5",
     "webpack": "^1.3.0",
     "webpack-dev-middleware": "^1.0.11"
+  },
+  "eslintConfig": {
+     "env": {
+       "browser": true,
+       "node": true
+     },
+
+    "rules": {
+     "quotes": [2, "single", "avoid-escape"],
+     "strict": 0,
+     "camelcase": 2,
+     "comma-dangle": 0,
+     "semi": [2, "always"]
+    }
   }
 }
