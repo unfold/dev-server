@@ -1,3 +1,5 @@
+/*global __resourceQuery, __webpack_hash__*/
+
 var io = require('socket.io-client');
 var client = io.connect(__resourceQuery.substr(1));
 
