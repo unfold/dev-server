@@ -19,13 +19,14 @@ var defaults = {
 program
   .version(version, '-v --version')
   .description(description)
-  .usage('app.js --hostname myproject.dev --port 5000')
+  .usage('app.js --index src/index.html --hostname myproject.dev --port 5000')
   .option('-p, --port <n>', `serve from port. Defaults to ${defaults.port}`, defaults.port)
   .option('--hostname <url>', `serve from hostname. Defaults to ${defaults.hostname}`, defaults.hostname)
   .option('-c, --config <file>', 'your webpack config. Defaults to local webpack.config.js', resolve, defaults.config)
-  .option('-m, --middleware <express app>', 'optional express server', resolve)
+  .option('-m, --middleware <express app>', 'optional express server')
+  .option('-i, --index <file>', 'optional file to return on request', resolve)
   .parse(process.argv)
 
-program.middleware = program.middleware || resolve(program.args[0])
+program.middleware = program.middleware || program.args[0]
 
 server(program);
