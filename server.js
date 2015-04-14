@@ -69,7 +69,7 @@ function sendStats(socket, stats, initial) {
 
 function injectHot(config, url) {
   var hotEntries = [
-    path.join(__dirname, '..', 'client') + '?' + url
+    path.join(__dirname, 'client.js') + '?' + url
   ];
 
   for (var key in config.entry) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var program = require('commander');
-var server = require('../lib');
+var server = require('../server');
 var path = require('path');
 var version = require('../package').version;
 var description = require('../package').description;
