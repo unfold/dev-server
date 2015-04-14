@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!./node_modules/.bin/babel-node
 
 var minimist = require('minimist');
 var server = require('../lib');
