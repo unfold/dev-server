@@ -54,12 +54,12 @@ window.addEventListener('message', function(event) {
 
 function checkUpdatedModules(error, updatedModules) {
   if (error) {
-    console.error('Error while updating modules:', error)
+    console.error('Error while updating modules:', error);
     return;
   }
 
   if (!updatedModules) {
-    console.info('No updated modules')
+    console.info('No updated modules');
     return;
   }
 
@@ -67,7 +67,7 @@ function checkUpdatedModules(error, updatedModules) {
     ignoreUnaccepted: false
   }, function(error, renewedModules) {
     if (error) {
-      console.warn('Error while renewing modules:', error)
+      console.warn('Error while renewing modules:', error);
       return;
     }
 
@@ -75,7 +75,7 @@ function checkUpdatedModules(error, updatedModules) {
       return;
     }
 
-    console.log('Updated modules:')
+    console.log('Updated modules:');
 
     renewedModules.forEach(function(id) {
       console.log('  - ' + currentModules[id]);

@@ -6,10 +6,6 @@ var path = require('path');
 var version = require('../package').version;
 var description = require('../package').description;
 
-function resolve(file) {
-  return path.resolve(file)
-}
-
 program
   .version(version, '-v --version')
   .description(description)
@@ -18,7 +14,7 @@ program
   .option('--hostname <url>', 'serve from hostname')
   .option('-c, --config <file>', 'your webpack config', require)
   .option('-m, --middleware <express app>', 'optional express server')
-  .option('-i, --index <file>', 'optional file to return on request', resolve)
+  .option('-i, --index <file>', 'optional file to return on request', function(file) { return path.resolve(file); })
   .option('--log-browser-connections', 'log all browsers who connect to server')
   .parse(process.argv);
 
