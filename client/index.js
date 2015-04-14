@@ -6,7 +6,6 @@ var client = io.connect(__resourceQuery.substr(1), {
 });
 
 var initial = true;
-var disconnected = false;
 var currentHash = '';
 var currentModules = {};
 
@@ -39,15 +38,6 @@ client.on('warnings', function(warnings) {
   });
 
   reload();
-});
-
-client.on('disconnect', function() {
-  disconnected = true;
-  console.warn('Disconnected from development server');
-  location.reload();
-});
-
-client.on('reconnect', function() {
 });
 
 client.on('ok', reload);
