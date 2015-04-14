@@ -1,6 +1,6 @@
 {
   "name": "dev-server",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Unfold <github@unfold.no>",
   "description": "Development server for webpack with hot module reloading, simplified console outpout and express middleware support.",
   "repository": {
