@@ -25,6 +25,7 @@ program
   .option('-c, --config <file>', 'your webpack config. Defaults to local webpack.config.js', resolve, defaults.config)
   .option('-m, --middleware <express app>', 'optional express server')
   .option('-i, --index <file>', 'optional file to return on request', resolve)
+  .option('--log-browser-connections', 'log all browsers who connect to server')
   .parse(process.argv)
 
 program.middleware = program.middleware || program.args[0]
