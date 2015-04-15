@@ -7,7 +7,7 @@ Development server for webpack with hot module reloading, simplified console out
 ## Usage
 Install globally and use it as an executeable
 
-```$ dev-server --index src/index.html --hostname myproject.dev --port 5000```
+```$ dev-server --index src/index.html --port 5000```
 
 Or require it as a module
 
@@ -34,7 +34,7 @@ module.exports = app
 require('dev-server')({
   port: 5000,
   hostname: 'myproject.dev',
-  config: require('./config/webpack.development'),
+  config: require('./config/webpack.config'),
   middleware: require('./server')
 })
 ```

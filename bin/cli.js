@@ -27,6 +27,4 @@ program
   .option('--log-browser-connections', 'log all browsers who connect to server')
   .parse(process.argv);
 
-program.middleware = program.middleware || program.args[0];
-
 server(program);
