@@ -126,6 +126,8 @@ function serve(options) {
   var url = options.url || 'http://' + options.hostname + ':' + options.port;
   var config = injectHot(options.config, url);
 
+  console.log('\nServing at: \u001b[4m' + url + '\n\u001b[0m');
+
   var app = express();
   var server = http.createServer(app);
   app.use(createHotMiddleware(config, server, options.logBrowserConnections));
@@ -139,8 +141,6 @@ function serve(options) {
       res.sendFile(options.index);
     });
   }
-
-  console.log('\nServing at: \u001b[4m' + url + '\n\u001b[0m');
 
   server.listen(options.port);
 }
