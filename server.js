@@ -130,7 +130,7 @@ function serve(options) {
   var url = 'http://' + hostname + ':' + port;
   var config = injectHot(require(configPath), url);
 
-  console.log('\nServing at: \u001b[4m' + url + '\n\u001b[0m');
+  console.log('Serving at: \u001b[4m' + url + '\n\u001b[0m');
 
   var app = express();
   var server = http.createServer(app);
