@@ -1,5 +1,5 @@
 # Webpack development server
-Development server for webpack with hot module reloading, simplified console outpout and express middleware support.
+Development server for webpack with hot module reloading, simplified console outpout and [connect middleware](https://github.com/senchalabs/connect/wiki) support.
 
 ## Installation
 `$ npm install unfold/dev-server`
@@ -34,7 +34,7 @@ module.exports = app
 require('dev-server')({
   port: 5000,
   hostname: 'myproject.dev',
-  config: require('./config/webpack.config'),
+  config: './config/webpack.config',
   middleware: require('./server')
 })
 ```
@@ -44,12 +44,13 @@ require('dev-server')({
 
 ## Options
 ```
--h, --help                      output usage information
--v --version                    output the version number
--p, --port <n>                  serve from port
---hostname <url>                serve from hostname
--c, --config <file>             your webpack config
--m, --middleware <express app>  optional express server
--i, --index <file>              optional file to return on request
---log-browser-connections       log all browsers who connect to server
+-h, --help                 output usage information
+-v --version               output the version number
+-p, --port <port>          serve from port
+-H, --hostname <hostname>  serve from hostname
+-c, --config <path>        your webpack config
+-m, --middleware <path>    optional express server
+-i, --index <path>         optional file to return on request
+-e, --env [path]           import environment. defaults to .env
+--log-browser-connections  log all browsers who connect to server
 ```
