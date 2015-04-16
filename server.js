@@ -117,32 +117,36 @@ function createHotMiddleware(config, server, logBrowserConnections) {
 }
 
 function serve(options) {
-  // TODO: Better merging of options and defaults
   options = options || {};
-  options.port = options.port || process.env.PORT || 3000;
-  options.hostname = options.hostname || process.env.HOSTNAME || 'localhost';
-  options.config = options.config || require(path.resolve('webpack.config.js'));
 
-  var url = options.url || 'http://' + options.hostname + ':' + options.port;
-  var config = injectHot(options.config, url);
+  var port = options.port || process.env.PORT || 3000;
+  var hostname = options.hostname || process.env.HOSTNAME || 'localhost';
+  var logBrowserConnections = options.logBrowserConnections;
+
+  var configPath = options.config || path.resolve('webpack.config.js');
+  var middlewarePath = options.middleware && path.resolve(options.middleware);
+  var indexPath = options.index && path.resolve(options.index);
+
+  var url = 'http://' + hostname + ':' + port;
+  var config = injectHot(require(configPath), url);
 
   var app = express();
   var server = http.createServer(app);
-  app.use(createHotMiddleware(config, server, options.logBrowserConnections));
+  app.use(createHotMiddleware(config, server, logBrowserConnections));
 
-  if (options.middleware) {
-    app.use(options.middleware);
+  if (middlewarePath) {
+    app.use(require(middlewarePath));
   }
 
-  if (options.index) {
+  if (indexPath) {
     app.use(function(req, res) {
-      res.sendFile(options.index);
+      res.sendFile(indexPath);
     });
   }
 
   console.log('\nServing at: \u001b[4m' + url + '\n\u001b[0m');
 
-  server.listen(options.port);
+  server.listen(port);
 }
 
 module.exports = serve;

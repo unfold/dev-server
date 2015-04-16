@@ -7,17 +7,8 @@ var path = require('path');
 var version = require('../package').version;
 var description = require('../package').description;
 
-// Commander sends undefined values to transform functions which bugs path.resolve
-function resolve(file) {
-  return path.resolve(file);
-}
-
-function resolveAndRequire(file) {
-  return require(resolve(file));
-}
-
 function importEnv(file) {
-  fs.readFileSync(resolve(file), 'utf-8').split('\n').forEach(function(line) {
+  fs.readFileSync(path.resolve(file), 'utf-8').split('\n').forEach(function(line) {
     var matches = line.match(/(\w+)\s*=\s*(\S+)/);
 
     if (matches) {
@@ -33,12 +24,12 @@ program
   .version(version, '-v --version')
   .description(description)
   .usage('app.js --index src/index.html --hostname myproject.dev --port 5000')
-  .option('-p, --port <n>', 'serve from port')
-  .option('--hostname <url>', 'serve from hostname')
-  .option('-c, --config <file>', 'your webpack config', resolveAndRequire)
-  .option('-m, --middleware <express app>', 'optional express server', resolveAndRequire)
-  .option('-i, --index <file>', 'optional file to return on request', resolve)
-  .option('-e, --env [file]', 'import environment. defaults to .env')
+  .option('-p, --port <port>', 'serve from port')
+  .option('-H, --hostname <hostname>', 'serve from hostname')
+  .option('-c, --config <path>', 'your webpack config')
+  .option('-m, --middleware <path>', 'optional express server')
+  .option('-i, --index <path>', 'optional file to return on request')
+  .option('-e, --env [path]', 'import environment. defaults to .env')
   .option('--log-browser-connections', 'log all browsers who connect to server')
   .parse(process.argv);
 
