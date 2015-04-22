@@ -29,13 +29,13 @@ if (!module.parent) {
 module.exports = app
 ```
 
-**dev-server.js**
+**lib/dev-server.js**
 ``` javascript
 require('dev-server')({
   port: 5000,
   hostname: 'myproject.dev',
-  config: './config/webpack.config',
-  middleware: './lib/server.js'
+  config: '../config/webpack.config',
+  middleware: '../server.js'
 })
 ```
 
