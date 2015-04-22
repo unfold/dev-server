@@ -35,7 +35,7 @@ require('dev-server')({
   port: 5000,
   hostname: 'myproject.dev',
   config: './config/webpack.config',
-  middleware: require('./server')
+  middleware: './lib/server.js'
 })
 ```
 
