@@ -11,7 +11,7 @@ it can be run globally as `$ dev-server` or as a module `require('dev-server')()
 If your application depends on a server, you can pass it on to the dev-server as a middleware to serve requests for content and API calls.
 
 **app.js**
-```
+``` javascript
 var express = require('express')
 var app = express()
 var api = require('./api')
@@ -32,7 +32,7 @@ module.exports = app
 ```
 
 **lib/development-server.js**
-```
+``` javascript
 var path = require('path')
 var devServer = require('dev-server')
 
