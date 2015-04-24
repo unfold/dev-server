@@ -47,8 +47,8 @@ Start it with `$ node lib/development-server` or add it to your your package.jso
 ``` json
 …
 scripts: {
-    start: 'node app.js',
-    serve: 'node lib/development-server.js'
+    "start": "node app.js",
+    "serve": "node lib/development-server.js"
 }
 …
 ```
