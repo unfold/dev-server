@@ -28,7 +28,6 @@ if (!module.parent) {
 }
 
 module.exports = app
-
 ```
 
 **lib/development-server.js**
@@ -43,6 +42,17 @@ devServer({
   middleware: path.resolve(__dirname, '../app.js')
 })
 ```
+
+Start it with `$ node lib/development-server` or add it to your your package.json
+``` json
+…
+scripts: {
+    start: 'node app.js',
+    serve: 'node lib/development-server.js'
+}
+…
+```
+and run `$ npm run serve`
 
 ## Options
 Options can be accessed with `$ dev-server -h`
