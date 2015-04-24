@@ -49,7 +49,7 @@ require('dev-server')({
 -p, --port <port>          serve from port
 -H, --hostname <hostname>  serve from hostname
 -c, --config <path>        your webpack config
--m, --middleware <path>    optional express server
+-m, --middleware <path>    optional connect middleware
 -i, --index <path>         optional file to return on request
 -e, --env [path]           import environment. defaults to .env
 --log-browser-connections  log all browsers who connect to server

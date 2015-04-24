@@ -27,7 +27,7 @@ program
   .option('-p, --port <port>', 'serve from port')
   .option('-H, --hostname <hostname>', 'serve from hostname')
   .option('-c, --config <path>', 'your webpack config')
-  .option('-m, --middleware <path>', 'optional express server')
+  .option('-m, --middleware <path>', 'optional connect middleware')
   .option('-i, --index <path>', 'optional file to return on request')
   .option('-e, --env [path]', 'import environment. defaults to .env')
   .option('--log-browser-connections', 'log all browsers who connect to server')
