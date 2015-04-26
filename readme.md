@@ -5,7 +5,7 @@ Development server for webpack with hot module reloading, simplified console out
 `$ npm install unfold/dev-server`
 
 ## Usage
-it can be run globally as `$ dev-server` or as a module `require('dev-server')()` with port 3000, localhost as hostname and webpack.config.js in current directory as defaults.
+it can be run globally as `$ dev-server` or as a module `require('dev-server')()` and defaults to webpack.config.js in current directory and serves from http://localhost:3000.
 
 ## Example
 If your application depends on a server, you can pass it on to the dev-server as a middleware to serve requests for content and API calls.
