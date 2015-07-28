@@ -9,6 +9,15 @@ var initial = true;
 var currentHash = '';
 var currentModules = {};
 
+var reportStyle = [
+  'font-weight:normal',
+].join(';');
+
+var moduleStyle = [
+  'color:#444',
+  'font-weight:bolder',
+].join(';');
+
 function reload() {
   if (initial) {
     initial = false;
@@ -17,6 +26,23 @@ function reload() {
   }
 
   window.postMessage('webpackHotUpdate' + currentHash, '*');
+}
+
+function logModules(modules) {
+  const count = modules.length
+  var firstModuleName = currentModules[modules[0]].match(/[^\/]+\/([^\/]+)$/)[0]
+
+  if (count > 1 && console.groupCollapsed) {
+    console.groupCollapsed('%cUpdated ' + count + ' modules %c' + firstModuleName + ', ...', reportStyle, moduleStyle)
+
+    modules.forEach(function(id) {
+      console.log('  - ' + currentModules[id]);
+    });
+
+    console.groupEnd()
+  } else {
+    console.log('%cUpdated module %c' + firstModuleName,  reportStyle, moduleStyle)
+  }
 }
 
 client.on('update', function(hash, modules) {
@@ -75,10 +101,6 @@ function checkUpdatedModules(error, updatedModules) {
       return;
     }
 
-    console.log('Updated modules:');
-
-    renewedModules.forEach(function(id) {
-      console.log('  - ' + currentModules[id]);
-    });
+    logModules(renewedModules)
   });
 }
