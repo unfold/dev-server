@@ -30,7 +30,6 @@ program
   .option('-m, --middleware <path>', 'optional connect middleware')
   .option('-i, --index <path>', 'optional file to return on request')
   .option('-e, --env [path]', 'import environment. defaults to .env')
-  .option('--log-browser-connections', 'log all browsers who connect to server')
   .parse(process.argv);
 
 if (program.env) {

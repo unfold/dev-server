@@ -85,16 +85,11 @@ function injectHot(config, url) {
   return config;
 }
 
-function createHotMiddleware(config, server, logBrowserConnections) {
+function createHotMiddleware(config, server) {
   var currentStats;
 
   var sockets = io(server);
   sockets.on('connection', function(socket) {
-    if (logBrowserConnections) {
-      var browser = socket.handshake.headers['user-agent'].match(/(opera|chrome|safari|firefox|msie(?=\/))\/?\s*(\d+)/i)[1];
-      console.log('\n\u001b[2mConnected to \u001b[1m' + browser + '\u001b[0m');
-    }
-
     if (currentStats) {
       sendStats(socket, currentStats, true);
     }
@@ -121,7 +116,6 @@ function serve(options) {
 
   var port = options.port || process.env.PORT || 3000;
   var hostname = options.hostname || process.env.HOSTNAME || 'localhost';
-  var logBrowserConnections = options.logBrowserConnections;
 
   var configPath = options.config || path.resolve('webpack.config.js');
   var middlewarePath = options.middleware && path.resolve(options.middleware);
@@ -134,7 +128,7 @@ function serve(options) {
 
   var app = express();
   var server = http.createServer(app);
-  app.use(createHotMiddleware(config, server, logBrowserConnections));
+  app.use(createHotMiddleware(config, server));
 
   if (middlewarePath) {
     app.use(require(middlewarePath));
