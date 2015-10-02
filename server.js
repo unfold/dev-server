@@ -67,13 +67,19 @@ function sendStats(socket, stats, initial) {
   }
 }
 
-function injectHot(config, url) {
+function injectHot(config, url, entries) {
   var hotEntries = [
     path.join(__dirname, 'client.js') + '?' + url
   ];
 
-  for (var key in config.entry) {
-    config.entry[key] = hotEntries.concat(config.entry[key]);
+  if (Array.isArray(config.entry) || typeof config.entry === 'string') {
+    config.entry = hotEntries.concat(config.entry);
+  } else {
+    var keys = entries || Object.keys(config.entry);
+
+    keys.forEach(function(key) {
+      config.entry[key] = hotEntries.concat(config.entry[key]);
+    })
   }
 
   config.plugins = (config.plugins || []).concat(
@@ -120,9 +126,10 @@ function serve(options) {
   var configPath = options.config || path.resolve('webpack.config.js');
   var middlewarePath = options.middleware && path.resolve(options.middleware);
   var indexPath = options.index && path.resolve(options.index);
+  var entries = options.injectHot && options.injectHot.split(',')
 
   var url = 'http://' + hostname + ':' + port;
-  var config = injectHot(require(configPath), url);
+  var config = injectHot(require(configPath), url, entries);
 
   console.log('Serving at: \u001b[4m' + url + '\n\u001b[0m');
 
