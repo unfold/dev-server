@@ -30,7 +30,7 @@ program
   .option('-m, --middleware <path>', 'optional connect middleware')
   .option('-i, --index <path>', 'optional file to return on request')
   .option('-e, --env [path]', 'import environment. defaults to .env')
-  .option('--log-browser-connections', 'log all browsers who connect to server')
+  .option('--inject-hot <paths>', 'explicitly specify which entries to inject the HMR client into (e.g --inject-hot client,bundle)')
   .parse(process.argv);
 
 if (program.env) {

@@ -67,13 +67,19 @@ function sendStats(socket, stats, initial) {
   }
 }
 
-function injectHot(config, url) {
+function injectHot(config, url, entries) {
   var hotEntries = [
     path.join(__dirname, 'client.js') + '?' + url
   ];
 
-  for (var key in config.entry) {
-    config.entry[key] = hotEntries.concat(config.entry[key]);
+  if (Array.isArray(config.entry) || typeof config.entry === 'string') {
+    config.entry = hotEntries.concat(config.entry);
+  } else {
+    var keys = entries || Object.keys(config.entry);
+
+    keys.forEach(function(key) {
+      config.entry[key] = hotEntries.concat(config.entry[key]);
+    })
   }
 
   config.plugins = (config.plugins || []).concat(
@@ -85,16 +91,11 @@ function injectHot(config, url) {
   return config;
 }
 
-function createHotMiddleware(config, server, logBrowserConnections) {
+function createHotMiddleware(config, server) {
   var currentStats;
 
   var sockets = io(server);
   sockets.on('connection', function(socket) {
-    if (logBrowserConnections) {
-      var browser = socket.handshake.headers['user-agent'].match(/(opera|chrome|safari|firefox|msie(?=\/))\/?\s*(\d+)/i)[1];
-      console.log('\n\u001b[2mConnected to \u001b[1m' + browser + '\u001b[0m');
-    }
-
     if (currentStats) {
       sendStats(socket, currentStats, true);
     }
@@ -121,20 +122,20 @@ function serve(options) {
 
   var port = options.port || process.env.PORT || 3000;
   var hostname = options.hostname || process.env.HOSTNAME || 'localhost';
-  var logBrowserConnections = options.logBrowserConnections;
 
   var configPath = options.config || path.resolve('webpack.config.js');
   var middlewarePath = options.middleware && path.resolve(options.middleware);
   var indexPath = options.index && path.resolve(options.index);
+  var entries = options.injectHot && options.injectHot.split(',')
 
   var url = 'http://' + hostname + ':' + port;
-  var config = injectHot(require(configPath), url);
+  var config = injectHot(require(configPath), url, entries);
 
   console.log('Serving at: \u001b[4m' + url + '\n\u001b[0m');
 
   var app = express();
   var server = http.createServer(app);
-  app.use(createHotMiddleware(config, server, logBrowserConnections));
+  app.use(createHotMiddleware(config, server));
 
   if (middlewarePath) {
     app.use(require(middlewarePath));
