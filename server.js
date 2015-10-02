@@ -18,7 +18,10 @@ function displayStats(stats) {
   process.stderr.clearLine();
   process.stderr.cursorTo(0);
 
-  if (stats.hasErrors() || stats.hasWarnings()) {
+  var hasErrors = stats.hasErrors()
+  var hasWarnings = stats.hasWarnings()
+
+  if (hasErrors || hasWarnings) {
     var options = {
       hash: false,
       version: false,
@@ -34,10 +37,13 @@ function displayStats(stats) {
       chunkOrigins: false
     };
 
-    process.stderr.write(stats.toString(options) + '\n\n\u001b[91mErrors!\u001b[0m');
+    process.stderr.write(stats.toString(options) + '\n\n');
+    process.stderr.write(hasErrors ? '\u001b[91mErrors.' : '\u001b[93mWarnings.');
   } else {
-    process.stderr.write('\u001b[92mReady.\u001b[0m');
+    process.stderr.write('\u001b[92mReady.');
   }
+
+  process.stderr.write('\u001b[0m');
 }
 
 function sendStats(socket, stats, initial) {
