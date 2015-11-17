@@ -1,6 +1,6 @@
 {
   "name": "dev-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Unfold <github@unfold.no>",
   "description": "Development server for webpack with hot module reloading, simplified console outpout and connect middleware support.",
   "repository": {
@@ -23,15 +23,21 @@
     "webpack-dev-middleware": "^1.0.11"
   },
   "eslintConfig": {
-     "env": {
-       "browser": true,
-       "node": true
-     },
-
+    "env": {
+      "browser": true,
+      "node": true
+    },
     "rules": {
-     "quotes": [2, "single", "avoid-escape"],
-     "comma-dangle": 0,
-     "semi": [2, "always"]
+      "quotes": [
+        2,
+        "single",
+        "avoid-escape"
+      ],
+      "comma-dangle": 0,
+      "semi": [
+        2,
+        "always"
+      ]
     }
   }
 }
