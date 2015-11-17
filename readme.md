@@ -62,7 +62,7 @@ Options can be accessed with `$ dev-server -h`
     -H, --hostname <hostname>  serve from hostname
     -c, --config <path>        your webpack config
     -m, --middleware <path>    optional connect middleware
-    -i, --index <path>         optional file to return on request
     -e, --env [path]           import environment. defaults to .env
+    -f, --history-fallback     fallback to / url is a directory
     --log-browser-connections  log all browsers who connect to server
 ```

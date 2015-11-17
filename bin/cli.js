@@ -28,8 +28,8 @@ program
   .option('-H, --hostname <hostname>', 'serve from hostname')
   .option('-c, --config <path>', 'your webpack config')
   .option('-m, --middleware <path>', 'optional connect middleware')
-  .option('-i, --index <path>', 'optional file to return on request')
   .option('-e, --env [path]', 'import environment. defaults to .env')
+  .option('-f, --history-fallback', 'fallback to / url is a directory')
   .option('--inject-hot <paths>', 'explicitly specify which entries to inject the HMR client into (e.g --inject-hot client,bundle)')
   .parse(process.argv);
 

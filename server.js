@@ -131,7 +131,6 @@ function serve(options) {
 
   var configPath = options.config || path.resolve('webpack.config.js');
   var middlewarePath = options.middleware && path.resolve(options.middleware);
-  var indexPath = options.index && path.resolve(options.index);
   var entries = options.injectHot && options.injectHot.split(',')
 
   var url = 'http://' + hostname + ':' + port;
@@ -141,16 +140,21 @@ function serve(options) {
 
   var app = express();
   var server = http.createServer(app);
+
+  if(options.historyFallback) {
+    app.use(function(req, res, next) {
+      if(!req.url.includes('.')) {
+        req.url = '/';
+      }
+
+      next();
+    });
+  }
+
   app.use(createHotMiddleware(config, server));
 
   if (middlewarePath) {
     app.use(require(middlewarePath));
-  }
-
-  if (indexPath) {
-    app.use(function(req, res) {
-      res.sendFile(indexPath);
-    });
   }
 
   server.listen(port);
