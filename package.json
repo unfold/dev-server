@@ -1,5 +1,5 @@
 {
-  "name": "dev-server",
+  "name": "@unfold/dev-server",
   "version": "0.2.0",
   "author": "Unfold <github@unfold.no>",
   "description": "Development server for webpack with hot module reloading, simplified console outpout and connect middleware support.",
